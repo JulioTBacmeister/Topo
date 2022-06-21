@@ -1,4 +1,5 @@
-pro gridjeck,xcase=xcase,xtag=xtag,repo=repo,fi=fi,co=co,nsw0=nsw0,nc=nc,ogrid=ogrid,quick=quick,stops=stops $
+pro gridjeck,xcase=xcase,xtag=xtag,version=version $
+            ,repo=repo,fi=fi,co=co,nsw0=nsw0,nc=nc,ogrid=ogrid,quick=quick,stops=stops $
             ,rema=rema,fcam=fcam,topo=topo,grem=grem,tg=tg,list=list,tile=tile $
             ,cu=cu,latt=latt,lont=lont,itrgt=itrgt,xlist=xlist,xy=xy,terroutput=terroutput,xloutput=xloutput $
             ,rr=rr
@@ -39,7 +40,7 @@ rncvar,f=topo,get='terr_dev',dat=dev
 rncvar,f=topo,get='terr_sm',dat=smooth
 if keyword_set(rr) then rncvar,f=topo,get='rr_fac',dat=rrfac
 
-rdremap,rem=rema,cube=cu
+rdremap,rem=rema,cube=cu,version=version
 if keyword_set(xloutput) then rdglist_e02,list=list,xlist=xlist
 
 if keyword_set(trxy) and keyword_set(terroutput) then terrxy,xy=xy,trxy=trxy

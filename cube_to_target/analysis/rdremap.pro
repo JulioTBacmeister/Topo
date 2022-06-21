@@ -1,5 +1,7 @@
 pro rdremap,remapfile=fn0,cube=cube,basedir=basedir,cesm2=cesm2 $
-           ,fvgrid=fvgrid,stop=stop,only_topo=only_topo
+           ,fvgrid=fvgrid,stop=stop,only_topo=only_topo,version=version
+
+if not keyword_set(version) then version=''
 
 if not keyword_set(basedir) then begin
    ;rewondir$='/project/amp/juliob/Topo-generate-devel/Topo/cube_to_target_devel/output/'
@@ -46,34 +48,42 @@ jpks=lonarr(npeaks)
 
 dum=0.d
 
-readu,1,uniqi
-readu,1,aniso
-readu,1,anglx
+case version of
 
+'v6': begin
+   readu,1,mxdis
+   readu,1,block
+   readu,1,profi
+end
 
-readu,1,mxdis
-readu,1,hwdth
-readu,1,clngt
+else: begin
+   readu,1,uniqi
+   readu,1,aniso
+   readu,1,anglx
+
+   readu,1,mxdis
+   readu,1,hwdth
+   readu,1,clngt
  
+   readu,1,block
+   readu,1,profi
 
-readu,1,block
-readu,1,profi
+   readu,1,nodes
+   readu,1,wedge
 
-readu,1,nodes
-readu,1,wedge
-
-readu,1,nodos
-readu,1,wedgo
+   readu,1,nodos
+   readu,1,wedgo
    
-readu,1,xs,ys,xspk,yspk,ipks,jpks
+   readu,1,xs,ys,xspk,yspk,ipks,jpks
 
-if not eof(1) then readu,1,riseq
-if not eof(1) then readu,1,fallq
-if not eof(1) then readu,1,uniqw
-if not eof(1) then readu,1,wedgi
-if not eof(1) then readu,1,repnt
+   if not eof(1) then readu,1,riseq
+   if not eof(1) then readu,1,fallq
+   if not eof(1) then readu,1,uniqw
+   if not eof(1) then readu,1,wedgi
+   if not eof(1) then readu,1,repnt
+end
 
-
+endcase
 
 close,1
 print," read from"

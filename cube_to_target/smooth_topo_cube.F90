@@ -269,7 +269,7 @@ CONTAINS
              stop
            end if
          end do
-         terr_dev = terr - terr_sm
+         !terr_dev = terr - terr_sm
        endif
       volterr_in=0.
       volterr_sm=0.
@@ -287,6 +287,8 @@ CONTAINS
          volterr_sm =  volterr_sm + sum( terr_sm(:,:,ip) * da )
       end do
       write(*,*) " Smooth Topo volume  AFTER rescaling = ",volterr_sm/(6*sum(da))
+
+      terr_dev = terr - terr_sm
 
 
       if (stop_after_smoothing .OR. ldevelopment_diags) then
