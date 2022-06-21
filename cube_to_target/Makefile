@@ -1,4 +1,8 @@
-include ../machine_settings.make
+# -- default workflow
+#include ../machine_settings.make
+# -- Julio workflow
+include ./machine_settings.make
+
 EXEDIR = .
 EXENAME = cube_to_target
 RM = rm
