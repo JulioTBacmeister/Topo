@@ -366,6 +366,8 @@ program convterr
   write(811,*) "ldistance_weighted_smoother     = ",ldistance_weighted_smoother
   write(811,*) "smooth_phis_numcycle            = ",smooth_phis_numcycle
   write(811,*) "smoothing_over_ocean            = ",lsmoothing_over_ocean
+    close(unit=811)
+
 
   !*********************************************************
   
