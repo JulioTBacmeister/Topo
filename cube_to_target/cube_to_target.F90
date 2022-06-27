@@ -342,31 +342,6 @@ program convterr
       stop
     end if
   end if
-  
-  OPEN (unit = 811, file= 'Namelist.txt' ,form="FORMATTED")
-  write(811,*) " "
-  write(811,*) "Namelist settings"
-  write(811,*) "================="
-  write(811,*)
-  write(811,*) "smoothing_scale                 = ",smoothing_scale
-  write(811,*) "nwindow_halfwidth               = ",nwindow_halfwidth
-  write(811,*) "ncube_sph_smooth_fine           = ",ncube_sph_smooth_fine
-  write(811,*) "grid_descriptor_fname           = ",trim(grid_descriptor_fname)
-  write(811,*) "intermediate_cubed_sphere_fname = ",trim(intermediate_cubed_sphere_fname)
-  write(811,*) "output_grid                     = ",trim(output_grid)
-  write(811,*) "luse_prefilter                  = ",luse_prefilter
-  write(811,*) "lfind_ridges                    = ",lfind_ridges
-  write(811,*) "rrfac_max                       = ",rrfac_max
-  write(811,*) "ldevelopment_diags              = ",ldevelopment_diags
-  write(811,*) "lridgetiles                     = ",lridgetiles
-  write(811,*) "smooth_topo_fname               = ",trim(smooth_topo_fname)
-  write(811,*) "lwrite_rrfac_to_topo_file       = ",lwrite_rrfac_to_topo_file
-  write(811,*) "str_source                      = ",trim(str_source)
-  write(811,*) "interpolate_phis                = ",linterp_phis
-  write(811,*) "ldistance_weighted_smoother     = ",ldistance_weighted_smoother
-  write(811,*) "smooth_phis_numcycle            = ",smooth_phis_numcycle
-  write(811,*) "smoothing_over_ocean            = ",lsmoothing_over_ocean
-    close(unit=811)
 
 
   !*********************************************************
@@ -449,6 +424,38 @@ program convterr
 #ifdef idealized_test
   call idealized(terr,ncube)
 #endif
+
+
+
+  OPEN (unit = 811, file= 'Parameters.txt' ,form="FORMATTED")
+  write(811,*) " "
+  write(811,*) "Namelist and parameter settings"
+  write(811,*) "==============================="
+  write(811,*)
+  write(811,*) "ldistance_weighted_smoother     = ",ldistance_weighted_smoother
+  write(811,*) "smoothing_scale                 = ",smoothing_scale
+  write(811,*) "smooth_phis_numcycle            = ",smooth_phis_numcycle
+  write(811,*) "nu_lap                          = ",nu_lap
+  write(811,*) "smoothing_over_ocean            = ",lsmoothing_over_ocean
+  write(811,*) "nwindow_halfwidth               = ",nwindow_halfwidth
+  write(811,*) "ncube_sph_smooth_fine           = ",ncube_sph_smooth_fine
+  write(811,*) "ncube_sph_smooth_coarse         = ",ncube_sph_smooth_coarse
+  write(811,*) "grid_descriptor_fname           = ",trim(grid_descriptor_fname)
+  write(811,*) "intermediate_cubed_sphere_fname = ",trim(intermediate_cubed_sphere_fname)
+  write(811,*) "output_grid                     = ",trim(output_grid)
+  write(811,*) "luse_prefilter                  = ",luse_prefilter
+  write(811,*) "lfind_ridges                    = ",lfind_ridges
+  write(811,*) "rrfac_max                       = ",rrfac_max
+  write(811,*) "ldevelopment_diags              = ",ldevelopment_diags
+  write(811,*) "lridgetiles                     = ",lridgetiles
+  write(811,*) "smooth_topo_fname               = ",trim(smooth_topo_fname)
+  write(811,*) "lwrite_rrfac_to_topo_file       = ",lwrite_rrfac_to_topo_file
+  write(811,*) "str_source                      = ",trim(str_source)
+  write(811,*) "interpolate_phis                = ",linterp_phis
+    close(unit=811)
+
+
+
 
   allocate ( dA(ncube,ncube),stat=alloc_error )
   CALL EquiangularAllAreas(ncube, dA)
