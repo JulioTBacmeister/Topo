@@ -1,7 +1,11 @@
-# -- default workflow
-#include ../machine_settings.make
+ifeq "$(USER)" "juliob"
 # -- Julio workflow
-include ./machine_settings.make
+  include ./machine_settings.make
+else
+# -- default workflow
+  include ../machine_settings.make
+endif
+
 
 EXEDIR = .
 EXENAME = cube_to_target
