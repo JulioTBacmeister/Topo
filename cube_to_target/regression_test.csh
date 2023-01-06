@@ -56,7 +56,7 @@ set scale = 112
 
 set smtopo = '/project/amp/juliob/Topo-generate-devel/Topo/Topo.git/cases/Reg_ne30pg3_co12_fi0_bsln/output/topo_smooth_gmted2010_modis_bedmachine_nc0540_Co012.nc'
 
-./cube_to_target --grid_descriptor_file='../../regression-test-data/ne30pg3.nc' --intermediate_cs_name='../../regression-test-data/gmted2010_bedmachine-ncube0540-220518.nc' --output_grid=$ogrid --smoothing_scale=$scale --fine_radius=$Fi -u 'userid@ucar.edu' -q 'output/' -z
+./cube_to_target --grid_descriptor_file='../../regression-test-data/ne30pg3.nc' --intermediate_cs_name='../../regression-test-data/gmted2010_bedmachine-ncube0540-220518.nc' --output_grid=$ogrid --smoothing_scale=$scale --fine_radius=$Fi -u 'userid@ucar.edu' -q 'output/' -z -m
 
 #./cube_to_target --grid_descriptor_file='../../regression-test-data/ne30pg3.nc' --intermediate_cs_name='../../regression-test-data/gmted2010_bedmachine-ncube0540-220518.nc' --output_grid=$ogrid --smoothing_scale=$scale --smooth_topo_file=$smtopo --fine_radius=$Fi -u 'userid@ucar.edu' -q 'output/' -z
 

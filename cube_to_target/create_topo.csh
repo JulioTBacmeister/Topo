@@ -131,9 +131,9 @@ ln -sf $smtopo output/topo_smooth.nc
 
 
 #READ IN Smooth and find ridges
-#./cube_to_target --grid_descriptor_file=$scrip --intermediate_cs_name=$cstopo --output_grid=$ogrid --smoothing_scale=100. --fine_radius=$Fi -u 'juliob@ucar.edu' -q 'output/' -z
+./cube_to_target --grid_descriptor_file=$scrip --intermediate_cs_name=$cstopo --output_grid=$ogrid --smoothing_scale=100. --fine_radius=$Fi -u 'juliob@ucar.edu' -q 'output/' -z
 
-./cube_to_target --grid_descriptor_file=$scrip --intermediate_cs_name=$cstopo --output_grid=$ogrid --smoothing_scale=100. --fine_radius=$Fi --smooth_topo_file=$smtopo -u 'juliob@ucar.edu' -q 'output/' -z
+#./cube_to_target --grid_descriptor_file=$scrip --intermediate_cs_name=$cstopo --output_grid=$ogrid --smoothing_scale=100. --fine_radius=$Fi --smooth_topo_file=$smtopo -u 'juliob@ucar.edu' -q 'output/' -z
 
 
 
