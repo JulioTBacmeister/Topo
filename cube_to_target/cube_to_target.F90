@@ -160,7 +160,7 @@ program convterr
   command_line_arguments    = './cube_to_target'
   grid_descriptor_fname     = ''
   grid_descriptor_fname_gll = ''
-  
+
   ! Process options one by one
   do
     select case( getopt( "c:f:g:hi:o:prxy:vz1:t:du:n:q:a:sbl:m", opts ) ) ! opts is optional (for longopts only)

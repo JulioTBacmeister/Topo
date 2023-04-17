@@ -465,6 +465,9 @@ write(*,*) " SHAPE ", shape( peaks%i )
         if(do_refine) nswx = NINT( nswx / rr_factor(i,j,np) )
         if(do_refine) RefFac(ipk) = rr_factor(i,j,np) 
 
+!++jtb 04/14/23: Protection against too-small nswx
+        nswx = MAX( 4 , nswx )
+
         NSWx_diag( ipk ) = nswx
 
              allocate( suba( 2*nswx+1 ,  2*nswx+1 ) )
@@ -2496,6 +2499,8 @@ write(*,*) " in paintridge "
              
              
              NSWx = NSW / RefFac(ipk)
+!++jtb 04/14/23: Protection against too-small nswx
+             NSWx = MAX( 4 , NSWx )
 
              if (.NOT.(allpixels)) then
 #if 0

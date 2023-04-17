@@ -1,41 +1,25 @@
 #!/bin/tcsh
 
-
-if ( "$#argv" != 4) then
+if ( "$#argv" != 3) then
   echo "Wrong number of arguments specified:"
   set n = 1
-  echo "ogrid = argv[1]"
-  echo "Co    = argv[2]"
-  echo "Fi    = argv[3]"
-  echo "tag   = argv[4]"
+  echo "          ogrid   = argv[1]"
+  echo "smoothing scale   = argv[2]"
+  echo "            tag   = argv[3]"
   echo "     "
   echo "possible ogrid values: fv_0.9x1.25, ne30pg3 ..."
   exit
 endif
 
-set case = $argv[1]"_co"$argv[2]"_fi"$argv[3]"_"$argv[4]
+set case = $argv[1]"_Sco"$argv[2]"_"$argv[3]
 echo $case
 
 mkdir -p ../cases/${case}/output
 cp *.F90 ../cases/${case}
 cp Makefile ../cases/${case}
 cp ../machine_settings.make ../cases/${case}
-#cp clean_topo_files.csh ../cases/${case}
-#cp -r analysis ../${case}
-
 
 cd ../cases/${case}
-
-
-#cp output/topo_smooth* ../${case}/output/
-#cd /project/amp/juliob/Topo-generate-devel/Topo/smooth_topo/
-#set tops=`ls -1 *`
-#cd /project/amp/juliob/Topo-generate-devel/Topo/${case}
-#foreach foo ($tops)
-#   echo $foo
-#   ln -sf /project/amp/juliob/Topo-generate-devel/Topo/smooth_topo/${foo} output/${foo}
-#end
-
 
 # Assumes you are in the right directory, i.e, the one with F90 files and namelists
 #----------------------------------------------------------------------------------
@@ -48,18 +32,16 @@ module load compiler/gnu/default
 gmake clean
 gmake
 
+# Set output grid (i.e. model grid)
 set n = 1
 set ogrid = "$argv[$n]"
+
+# Set "smoothing scale"
 set n = 2
 set Co = "$argv[$n]"
-set n = 3
-set Fi = "$argv[$n]"
-
-# This is now used for all. Doesn't matter, will eliminate
-#set Nrs=00
+set Fi = "0"
 
 echo "Here you are "
-
 
 if ( $ogrid == 'geos_fv_c48' ) then
    set scrip='PE48x288-CF.nc4'
@@ -131,7 +113,7 @@ ln -sf $smtopo output/topo_smooth.nc
 
 
 #READ IN Smooth and find ridges
-./cube_to_target --grid_descriptor_file=$scrip --intermediate_cs_name=$cstopo --output_grid=$ogrid --smoothing_scale=100. --fine_radius=$Fi -u 'juliob@ucar.edu' -q 'output/' -z
+./cube_to_target --grid_descriptor_file=$scrip --intermediate_cs_name=$cstopo --output_grid=$ogrid --smoothing_scale=$Co --fine_radius=$Fi -u 'juliob@ucar.edu' -q 'output/' -z
 
 #./cube_to_target --grid_descriptor_file=$scrip --intermediate_cs_name=$cstopo --output_grid=$ogrid --smoothing_scale=100. --fine_radius=$Fi --smooth_topo_file=$smtopo -u 'juliob@ucar.edu' -q 'output/' -z
 

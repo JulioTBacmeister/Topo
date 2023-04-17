@@ -359,7 +359,10 @@ subroutine read_target_grid(grid_descriptor_fname,lregional_refinement,ltarget_l
   str_center_lon   = (/"grid_center_lon       ","centerCoordsnodeCoords"/) !(elementCount, coordDim)
   str_center_lat   = (/"grid_center_lat       ","centerCoordsnodeCoords"/) !(elementCount, coordDim)
   str_area         = (/"grid_area             ","elementArea           "/)
-  str_rrfac        = (/"rrfac                 ","elementRefinementRatio"/)
+!++jtb : I think this is a better name
+  str_rrfac        = (/"grid_refinement_factor","elementRefinementRatio"/)
+  !str_rrfac        = (/"rrfac                 ","elementRefinementRatio"/)
+!--jtb
 
   write(*,*) "Opening grid descriptor file :  ",TRIM(grid_descriptor_fname)
   status = nf_open(TRIM(grid_descriptor_fname), 0, ncid)
@@ -583,8 +586,8 @@ subroutine read_refinement_factor(rrfactor_fname,ncube_rr)
     print*,'Program could not allocate space for refine_l'
     stop
   end if
-  
-  status = NF_INQ_VARID(ncid, 'refine_level', landid)
+!++jtb : Isn't it better to have dfferent names for integer and float refine?  
+  status = NF_INQ_VARID(ncid, 'irefine_level', landid)
   IF (status .NE. NF_NOERR) CALL HANDLE_ERR(status)
   
   status = NF_GET_VAR_INT(ncid, landid,refine_li)
