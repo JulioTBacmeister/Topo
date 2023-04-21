@@ -1,6 +1,6 @@
 #define ROTATEBRUSH
 #define DETGDEP
-#undef DEBUGOUTPUT
+#define DEBUGOUTPUT
 module ridge_ana
 
 use rotation, only : rotbyx => rotby4
@@ -602,6 +602,7 @@ write(*,*) " SHAPE ", shape( peaks%i )
       write(32) npeaks  , PSW
       do ipk=1,npeaks
         write(32) xs(ipk),ys(ipk)  , MyPanel(ipk),xspk(ipk),yspk(ipk)
+        write(32) mxdis(ipk),hwdth(ipk),clngth(ipk)
         write(32) rt_diag(:,:,ipk)
         write(32) suba_diag(:,:,ipk)
       end do
